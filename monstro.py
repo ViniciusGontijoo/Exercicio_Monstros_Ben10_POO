@@ -32,6 +32,7 @@ class UltraT(Monstro):
     def __init__(self, vida, ataque):
         super().__init__(vida, ataque)
 
+
 class Duelo:
     def __init__(self, monstro1, monstro2):
         self.monstro1 = monstro1

@@ -24,7 +24,7 @@ if monstro1 == monstro2:
     print("\nERRO: O monstro 1 deve ser diferente do monstro 2.")
     print("Os monstros não podem ser iguais. Por favor, escolha dois monstros diferentes e tente novamente.")
 else:
-    from Exercicio_Monstros_Ben10_POO.monstro import Duelo
+    from monstro import Duelo
 
     duelo_monstros = Duelo(monstro1, monstro2)
     duelo_monstros.monstro_ganhador()
