@@ -8,87 +8,98 @@ class Monstro:
     def get_ataque(self):
         return self.__ataque
     
-    def set_vida(self, vida):
-        self.__vida = vida
+    def set_vida(self, vida_atualizada):
+        self.__vida = vida_atualizada
+
 
 
 class QuatroBracos(Monstro):
-    def __init__(self, vida, ataque):
-        super().__init__(vida, ataque)
+    def __init__(self):
+        super().__init__(100, 7)
     
 class Chama(Monstro):
-    def __init__(self, vida, ataque):
-        super().__init__(vida, ataque)
+    def __init__(self):
+        super().__init__(100, 8)
 
 class Diamante(Monstro):
-    def __init__(self, vida, ataque):
-        super().__init__(vida, ataque)
+    def __init__(self):
+        super().__init__(100, 8)
         
 class BalaDeCanhao(Monstro):
-    def __init__(self, vida, ataque):
-        super().__init__(vida, ataque)
+    def __init__(self):
+        super().__init__(100, 9)
         
 class UltraT(Monstro):
-    def __init__(self, vida, ataque):
-        super().__init__(vida, ataque)
+    def __init__(self):
+        super().__init__(100, 9)
+
 
 
 class Duelo:
     def __init__(self, monstro1, monstro2):
-        self.monstro1 = monstro1
-        self.monstro2 = monstro2
-        
-    def monstro_ganhador(self):
-        dicionario_monstros = {
+        self.numero_do_monstro1 = monstro1
+        self.numero_do_monstro2 = monstro2
+
+        self.monstro1 = None
+        self.monstro2 = None
+
+        self.dicionario_monstros = {
             1: "Quatro Braços",
             2: "Chama",
             3: "Diamante",
             4: "Bala de Canhão",
             5: "Ultra T"
         }
+        
 
-        numero_monstro1 = self.monstro1
-        numero_monstro2 = self.monstro2
-
-        if self.monstro1 == 1:
-            self.monstro1 = QuatroBracos(100, 7)
-        elif self.monstro1 == 2:
-            self.monstro1 = Chama(100, 8)
-        elif self.monstro1 == 3:
-            self.monstro1 = Diamante(100, 8)
-        elif self.monstro1 == 4:
-            self.monstro1 = BalaDeCanhao(100, 9)
+    def preparar_duelo(self):
+        if self.numero_do_monstro1 == 1:
+            self.monstro1 = QuatroBracos()
+        elif self.numero_do_monstro1 == 2:
+            self.monstro1 = Chama()
+        elif self.numero_do_monstro1 == 3:
+            self.monstro1 = Diamante()
+        elif self.numero_do_monstro1 == 4:
+            self.monstro1 = BalaDeCanhao()
         else:
-            self.monstro1 = UltraT(100, 9)
+            self.monstro1 = UltraT()
 
 
-        if self.monstro2 == 1:
-            self.monstro2 = QuatroBracos(100, 7)
-        elif self.monstro2 == 2:
-            self.monstro2 = Chama(100, 8)
-        elif self.monstro2 == 3:
-            self.monstro2 = Diamante(100, 8)
-        elif self.monstro2 == 4:
-            self.monstro2 = BalaDeCanhao(100, 9)
+        if self.numero_do_monstro2 == 1:
+            self.monstro2 = QuatroBracos()
+        elif self.numero_do_monstro2 == 2:
+            self.monstro2 = Chama()
+        elif self.numero_do_monstro2 == 3:
+            self.monstro2 = Diamante()
+        elif self.numero_do_monstro2 == 4:
+            self.monstro2 = BalaDeCanhao()
         else:
-            self.monstro2 = UltraT(100, 9)
+            self.monstro2 = UltraT()
 
-        vida_monstro1 = 100
-        vida_monstro2 = 100
 
-        while vida_monstro1 > 0 and vida_monstro2 > 0:
-            vida_monstro2 -= self.monstro1.get_ataque()
-            print(f"\nAtaque do {dicionario_monstros[numero_monstro1]} é:  {self.monstro1.get_ataque()}")
-            print(f"A vida do {dicionario_monstros[numero_monstro2]} é {vida_monstro2}")
+    def realizar_duelo(self):
+        while self.monstro1.get_vida() > 0 and self.monstro2.get_vida() > 0:
+            monstro1 = self.dicionario_monstros[self.numero_do_monstro1]
+            monstro2 = self.dicionario_monstros[self.numero_do_monstro2]
+            
+            ataque_do_monstro1 = self.monstro1.get_ataque()
+            vida_atualizada_do_monstro2 = self.monstro2.get_vida() - ataque_do_monstro1
+            self.monstro2.set_vida(vida_atualizada_do_monstro2)
 
-            if vida_monstro2 <= 0:
+            print(f"\nAtaque do {monstro1} é:  {ataque_do_monstro1}")
+            print(f"A vida do {monstro2} é {vida_atualizada_do_monstro2}")
+
+            if vida_atualizada_do_monstro2 <= 0:
                 break
             
-            vida_monstro1 -= (self.monstro2.get_ataque())
-            print(f"\nAtaque do {dicionario_monstros[numero_monstro2]} é:  {self.monstro2.get_ataque()}")
-            print(f"A vida do {dicionario_monstros[numero_monstro1]} é {vida_monstro1}")
+            ataque_do_monstro2 = self.monstro2.get_ataque()
+            vida_atualizada_do_monstro1 = self.monstro1.get_vida() - ataque_do_monstro2
+            self.monstro1.set_vida(vida_atualizada_do_monstro1)
 
-        if vida_monstro1 > vida_monstro2:
-            print(f"\nO {dicionario_monstros[numero_monstro1]} é o vencedor!")
+            print(f"\nAtaque do {monstro2} é:  {ataque_do_monstro2}")
+            print(f"A vida do {monstro1} é {vida_atualizada_do_monstro1}")
+
+        if vida_atualizada_do_monstro1 > vida_atualizada_do_monstro2:
+            print(f"\nO {monstro1} é o vencedor!")
         else:
-            print(f"\nO {dicionario_monstros[numero_monstro2]} é o vencedor!")
+            print(f"\nO {monstro2} é o vencedor!")

@@ -25,6 +25,6 @@ if monstro1 == monstro2:
     print("Os monstros não podem ser iguais. Por favor, escolha dois monstros diferentes e tente novamente.")
 else:
     from monstro import Duelo
-
-    duelo_monstros = Duelo(monstro1, monstro2)
-    duelo_monstros.monstro_ganhador()
+    duelo_dos_monstros = Duelo(monstro1, monstro2)
+    duelo_dos_monstros.preparar_duelo()
+    duelo_dos_monstros.realizar_duelo()
